@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa - Raio de 15 km</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>html,body,#map{height:100%;margin:0} .label{background:white;padding:6px 8px;border-radius:6px;border:1px solid #ccc;font-family:Arial,sans-serif}</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+const lat = -23.35799;
+const lon = -46.74087;
+const map = L.map('map').setView([lat, lon], 11);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+L.marker([lat, lon]).addTo(map).bindPopup('<b>Ponto central</b><br>R. Dina Maria Dartora, 6 - Jardim dos Abreus, Caieiras - SP, 07743-558').openPopup();
+L.circle([lat, lon], {
+  radius: 15000,
+  color: 'red',
+  weight: 3,
+  fillColor: 'red',
+  fillOpacity: 0.12
+}).addTo(map).bindPopup('Raio de 15 km');
+L.control.scale({metric:true, imperial:false}).addTo(map);
+</script>
+</body></html>
